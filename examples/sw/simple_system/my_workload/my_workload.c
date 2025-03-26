@@ -1,19 +1,10 @@
 #include <stdint.h>
-
-#define TIMER_BASE 0x80000000
-#define TIMER_CTRL *(volatile uint32_t *)(TIMER_BASE + 0x0)
-
-void delay(int cycles) {
-    for (volatile int i = 0; i < cycles; i++);
-}
-
+#define SIM_CTRL_ADDR *(volatile uint32_t *)(0x80002008)
 int main() {
-    while (1) {
-        TIMER_CTRL = 1;  // "Turn on LED"
-        delay(100000);
-        TIMER_CTRL = 0;  // "Turn off LED"
-        delay(100000);
-
+    for (int i = 0; i < 200; i++) {  // Double the loop
+        // Dummy work
+        volatile int x = i;
     }
+    SIM_CTRL_ADDR = 1;
     return 0;
 }
